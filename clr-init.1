@@ -1,0 +1,12 @@
+.TH clr\-init
+.SH FILES
+.PP
+\fB\fC/usr/local/lib/initrd/clr\-init.img.gz\fR
+.SH DESCRIPTION
+.PP
+small initrd wrote with C programming language that takes information from the cmdline in proc to mount root and execute
+/sbin/init from the root partition.
+.SH Luks Encryption support
+.PP
+for partitions encrypted with luks a password input will be displayed in boot time to decrypt root partition, add options
+to cmdline is not needed to know that root partition is encrypted.
