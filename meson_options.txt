@@ -1,0 +1,2 @@
+# initrd name
+option('with-initrd-name', type: 'string', description: 'Name of the initrd to be installed')

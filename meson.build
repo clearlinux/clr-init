@@ -10,7 +10,12 @@ src = [
     'src/error.c',
     'src/main.c'
 ]
-initrd_img = 'clr-init.img.gz'
+
+# Default to 10-clr-init.img.gz
+initrd_img = get_option('with-initrd-name')
+if initrd_img == ''
+    initrd_img = '10-clr-init.img.gz'
+endif
 
 cryptsetup = dependency('libcryptsetup')
 executable('init', src, dependencies : cryptsetup)
