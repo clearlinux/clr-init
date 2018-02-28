@@ -24,7 +24,22 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/reboot.h>
+#include <stdlib.h>
 #include "error.h"
+
+void system_reboot(const char *format, ...)
+{
+    va_list args;
+    if (format != NULL) { 
+        va_start(args, format);
+        vfprintf(stderr, format, args);
+        va_end(args);
+    }
+
+    puts("press enter to reboot");
+    getchar();
+    reboot(LINUX_REBOOT_CMD_RESTART);
+}
 
 void panic(const char *format, ...)
 {
@@ -37,7 +52,8 @@ void panic(const char *format, ...)
         fprintf(stderr, "%d:%s\n", errno, strerror(errno));
     }
 
-    puts("press enter to reboot");
+    puts("a kernel panic will be raised");
+    puts("press enter to continue");
     getchar();
-    reboot(LINUX_REBOOT_CMD_RESTART);
+    exit(1);
 }

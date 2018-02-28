@@ -53,7 +53,7 @@ int main(int argc __attribute__((unused)), char *argv[])
             }
         }
         if (err == CRYPT_WRONG_PASS) {
-            panic("YOU TRIED MORE THAN %d TIMES\n", CRYPT_PASSWORD_TRIES);
+            system_reboot("YOU TRIED MORE THAN %d TIMES\n", CRYPT_PASSWORD_TRIES);
         }
     }
 

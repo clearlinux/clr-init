@@ -31,4 +31,9 @@
  * from errno.
  */
 void panic(const char *format, ...);
+
+/**
+ * Reboot the system after show a message
+ */
+void system_reboot(const char *format, ...);
 #endif
