@@ -1,28 +1,148 @@
 ## clr-init
-small init wrote with C programming language that takes information from the cmdline in proc to mount root and execute
-/sbin/init from the root partition.
+Initrd created using systemd as init program
 
 ## Luks Encryption support
 
-for partitions encrypted with luks a password input will be displayed in boot time to decrypt root partition, add options
-to cmdline is not needed to know that root partition is encrypted.
+The systemd rd parameters for luks most be added to the kernel cmdline to know who is the encrypted root partition:
+https://www.freedesktop.org/software/systemd/man/systemd-cryptsetup-generator.html#Kernel%20Command%20Line
 
-## How it works
+This initrd most not be using with LVM partitons, how ever it could be complemented adding services in an additional initrd
 
-Taken two paramters from cmdline root and rootfstype root partition is mounted and its systemd(/sbin/init) is running
-nothing different than other initrd.
+## How this works
 
-Initrd just work when root option use the device name directly or PARTUUID for encryption initrd read the first part of
-the root partition looking for a luks header.
-
-## Compilation and Install
-
-This will will install clr-init.img.gz in /usr/local/lib/initrd
+This is the flow of an initrd with systemd:
 ```
-meson builddir && ninja -C builddir install
+    +----------------+
+    | systemd (init) |
+    +----------------+
+               +
+               v
+    +--------------------------------+
+    | system-generators              |
+    |--------------------------------|
+    | nfs-server-generator           |
+    | rpc-pipefs-generator           |
+    | systemd-cryptsetup-generator   |
+    | systemd-debug-generator        |
+    | systemd-fstab-generator        |
+    | systemd-getty-generator        |
+    | systemd-gpt-auto-generator     |
+    | systemd-system-update-generator|
+    | systemd-veritysetup-generator  |
+    +--------------------------------+
+               +
+               |
+               v
+     +-------------------+
+     |local-fs-pre.target|
+     +-------------------+
+               +
+               |
+               |
+               |
+               v
+ +-----------------------------+        +-----------------+         +-----------------------+
+ |  local-fs.target            |        |  swap.target    |         |  cryptsetup.target    |
+ |-----------------------------|        |-----------------|         |-----------------------|
+ |                             |        |                 |         |                       |
+ |  tmp.mount                  |        |  (various swap  |         |  (various cryptsetup  |
+ |  systemd-remount-fs.service |        |   devices...)   |         |      devices...)      |
+ |                             |        |                 |         |                       |
+ +-----------------------------+        +-----------------+         +-----------------------+
+               +                               |                               |
+               |                               |                               |
+               +------------------------------>|<------------------------------+
+                                               v
+                           +--------------------------------------+
+                           |  sysinit.target                      |
+                           |--------------------------------------|
+                           |  systemd-ask-password-console.path   |
+                           |  systemd-tmpfiles-setup-dev.service  |
+                           |  systemd-tmpfiles-setup.service      |
+                           |  systemd-udevd.service               |
+                           |  systemd-udev-trigger.service        |
+                           +--------------------------------------+
+                                               +
+                                               |
+         +------------------+-----------------+|+---------------+------------------------+
+         |                  |                  |                |                        |
+         |                  |                  |                |                        |
+         v                  v                  |                v                        v
+ +----------------+ +----------------+         |  +------------------------------++---------------+
+ |  timers.target | |  paths.target  |         |  |  sockets.target              || rescue.target |
+ |----------------| |----------------|         |  |------------------------------|+---------------+
+ |   (various     | |  (various      |         |  |  systemd-udevd-control.socket|
+ |  timers...)    | |  paths...)     |         |  |  systemd-udevd-kernel.socket |
+ |                | |                |         |  |                              |
+ +----------------+ +----------------+         |  +------------------------------+
+                           +                   |                +
+                           |                   |                |
+                           |                   |                |
+                           +------------------>|<---------------+
+                                               |
+                                               |
+                                               |
+                                               v
+                                        +------------+
+                                        |basic.target|
+                                        +------------+
+                                               +
+                                               |
+                                               v
+                                +--------------------------------+              +----------------+
+                                |  initrd-root-device.target     |              |emergency.target|
+                                |--------------------------------|              +----------------+
+                                |         sysroot.mount          |
+                                +--------------------------------+
+                                               +
+                                               |
+                                               v
+                                +--------------------------------+
+                                |    initrd-root-fs.target       |
+                                |--------------------------------|
+                                |   initrd-parse-etc.service     |
+                                +--------------------------------+
+                                               +
+                                               |
+                                               v
+                                +--------------------------------+
+                                |      initrd-fs.target          |
+                                |--------------------------------|
+                                |   (sysroot-usr.mount and       |
+                                |    various mounts marked       |
+                                |      with fstab option         |
+                                |     x-initrd.mount...)         |
+                                +--------------------------------+
+                                               +
+                                               |
+                                               v
+                              +------------------------------------+
+                              |           initrd.target            |
+                              |------------------------------------|
+                              |      initrd-cleanup.service        |
+                              | initrd-udevadm-cleanup-db.service  |
+                              +------------------------------------+
+                                               +
+                                               |
+                                               v
+                                +-------------------------------+
+                                |  initrd-switch-root.target    |
+                                |-------------------------------|
+                                |                               |
+                                |  initrd-switch-root.service   |
+                                |                               |
+                                +-------------------------------+
+                                               +
+                                               |
+                                               v
+                                   +------------------------+
+                                   | Transition to Host OS  |
+                                   +------------------------+
 ```
-install path could be changed using as sample:
+
+## Create and Install
+
+This will install clr-init.cpio.gz in /usr/lib/initrd
 ```
-meson --prefix /usr builddir
+make && make install
 ```
-in this case the installation path will be /usr/lib/initrd
