@@ -11,7 +11,8 @@ all:
     cd ..
 
 install: clr-init.cpio.gz
-	@cp $< $(DESTDIR)/usr/lib/initrd.d/
+	@mkdir -p $(DESTDIR)/usr/lib/initrd.d/ && \
+    cp $< $(DESTDIR)/usr/lib/initrd.d/
 
 clean:
 	@for file in $(BINFILES); \
