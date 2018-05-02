@@ -2,7 +2,6 @@
 /usr/bin/systemd-resolve
 /usr/bin/systemd-escape
 /usr/bin/systemd-cgtop
-/usr/bin/systemd-sysusers
 /usr/bin/systemd-tmpfiles
 /usr/bin/systemd-machine-id-setup
 /usr/bin/systemd-hwdb
@@ -22,7 +21,6 @@
 /usr/bin/systemd-stdio-bridge
 /usr/bin/udevadm
 /usr/bin/systemctl
-/usr/bin/systemd-firstboot
 /usr/bin/systemd-inhibit
 /usr/bin/systemd-path
 /usr/bin/systemd-socket-activate
@@ -34,7 +32,6 @@
 /usr/lib/systemd/systemd-localed
 /usr/lib/systemd/systemd-initctl
 /usr/lib/systemd/systemd-dissect
-/usr/lib/systemd/systemd-update-done
 /usr/lib/systemd/systemd-networkd-wait-online
 /usr/lib/systemd/systemd-user-sessions
 /usr/lib/systemd/systemd-timedated
@@ -48,9 +45,7 @@
 /usr/lib/systemd/systemd-cryptsetup
 /usr/lib/systemd/systemd-rfkill
 /usr/lib/systemd/systemd-ac-power
-/usr/lib/systemd/systemd-journal-upload
 /usr/lib/systemd/systemd-logind
-/usr/lib/systemd/systemd-bootchart
 /usr/lib/systemd/systemd-resolved
 /usr/lib/systemd/systemd-update-utmp
 /usr/lib/systemd/libsystemd-shared-234.so
@@ -71,10 +66,7 @@
 /usr/lib/systemd/system-generators/systemd-getty-generator
 /usr/lib/systemd/system-generators/systemd-veritysetup-generator
 /usr/lib/systemd/system-generators/systemd-cryptsetup-generator
-/usr/lib/systemd/system-generators/systemd-system-update-generator
 /usr/lib/systemd/system-generators/systemd-fstab-generator
-/usr/lib/systemd/system-generators/nfs-server-generator
-/usr/lib/systemd/system-generators/rpc-pipefs-generator
 /usr/lib/systemd/systemd-cgroups-agent
 /usr/lib/systemd/systemd-hostnamed
 /usr/lib64/libdbus-1.so.3
