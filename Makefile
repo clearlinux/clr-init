@@ -6,6 +6,7 @@ all:
     do \
         cp -f $$file initramfs/$$file;\
     done && \
+    cp $$(ldd $(BINFILES) | awk '{print $$3}' | grep "^/" | sort | uniq) initramfs/usr/lib64/ && \
     cd initramfs && \
     find . -print0 | cpio -o --null --format=newc | gzip -9 > ../clr-init.cpio.gz && \
     cd ..
