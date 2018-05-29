@@ -9,6 +9,7 @@
 /usr/bin/systemd-run
 /usr/bin/systemd-mount
 /usr/bin/mount
+/usr/bin/umount
 /usr/bin/systemd-notify
 /usr/bin/systemd-tty-ask-password-agent
 /usr/bin/systemd-cgls
