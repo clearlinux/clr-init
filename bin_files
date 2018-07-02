@@ -1,4 +1,6 @@
 /usr/bin/dmsetup
+/usr/bin/dmeventd
+/usr/bin/dmstats
 /usr/bin/systemd-resolve
 /usr/bin/systemd-escape
 /usr/bin/systemd-cgtop
