@@ -49,7 +49,7 @@
 /usr/lib/systemd/systemd-logind
 /usr/lib/systemd/systemd-resolved
 /usr/lib/systemd/systemd-update-utmp
-/usr/lib/systemd/libsystemd-shared-234.so
+/usr/lib/systemd/libsystemd-shared-*.so
 /usr/lib/systemd/systemd-random-seed
 /usr/lib/systemd/systemd-networkd
 /usr/lib/systemd/systemd
