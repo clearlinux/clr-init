@@ -1,0 +1,19 @@
+[Unit]
+Description=Load Kernel Modules on upgrades
+Documentation=man:systemd-modules-load.service(8) man:modules-load.d(5)
+DefaultDependencies=no
+Conflicts=shutdown.target
+Before=sysinit.target shutdown.target
+BindsTo=update-triggers.target
+ConditionCapability=CAP_SYS_MODULE
+ConditionDirectoryNotEmpty=|/usr/lib/modules-load.d
+ConditionDirectoryNotEmpty=|/etc/modules-load.d
+ConditionDirectoryNotEmpty=|/run/modules-load.d
+ConditionKernelCommandLine=|modules-load
+ConditionKernelCommandLine=|rd.modules-load
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/systemd/systemd-modules-load
+TimeoutSec=90s
