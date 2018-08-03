@@ -1,7 +1,7 @@
 BINFILES=`cat bin_files`
 
 all:
-	@mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/bin,usr/lib/systemd/system-generators,usr/lib64,run,root} && \
+	@mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root} && \
     for file in $(BINFILES); \
     do \
         cp -f $$file initramfs/$$file;\
@@ -20,5 +20,5 @@ clean:
     do \
 		rm -f initramfs/$$file; \
 	done && \
-    rm -rf initramfs/{sys,dev,proc,tmp,var,sysroot,usr/bin,usr/lib/systemd/system-generators,usr/lib64,run,root} && \
+    rm -rf initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root} && \
     rm clr-init.cpio.gz

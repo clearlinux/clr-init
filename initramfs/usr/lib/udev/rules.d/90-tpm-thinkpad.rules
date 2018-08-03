@@ -1,0 +1,1 @@
+KERNEL=="id", SUBSYSTEM=="dmi", ATTR{board_vendor}=="LENOVO", ATTR{product_family}=="ThinkPad*", IMPORT{program}="/usr/bin/modprobe -a tpm tpm_tis_core tpm_tis"
