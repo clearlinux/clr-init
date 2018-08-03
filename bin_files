@@ -60,14 +60,12 @@
 /usr/lib/systemd/systemd-vconsole-setup
 /usr/lib/systemd/systemd-modules-load
 /usr/lib/systemd/systemd-reply-password
-/usr/lib/systemd/systemd-veritysetup
 /usr/lib/systemd/systemd-shutdown
 /usr/lib/systemd/systemd-sulogin-shell
 /usr/lib/systemd/systemd-backlight
 /usr/lib/systemd/system-generators/systemd-debug-generator
 /usr/lib/systemd/system-generators/systemd-gpt-auto-generator
 /usr/lib/systemd/system-generators/systemd-getty-generator
-/usr/lib/systemd/system-generators/systemd-veritysetup-generator
 /usr/lib/systemd/system-generators/systemd-cryptsetup-generator
 /usr/lib/systemd/system-generators/systemd-fstab-generator
 /usr/lib/systemd/systemd-cgroups-agent
