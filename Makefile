@@ -14,6 +14,9 @@ all:
         file_path=$$(dirname $$file); \
         cp $$file initramfs/$$file_path/; \
     done && \
+    if [ -d /usr/lib64/haswell/ ]; then \
+        cp initramfs/usr/lib64/haswell/* initramfs/usr/lib64/; \
+    fi &&\
     cd initramfs && \
     find . -print0 | cpio -o --null --format=newc | gzip -9 > ../clr-init.cpio.gz && \
     cd ..
