@@ -1,7 +1,7 @@
 BINFILES=`cat bin_files`
 
 all:
-	@mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root} && \
+	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root} && \
     if [ -d /usr/lib64/haswell/ ]; then \
         mkdir -p initramfs/usr/lib64/haswell;\
     fi &&\
@@ -15,7 +15,10 @@ all:
         cp $$file initramfs/$$file_path/; \
     done && \
     if [ -d /usr/lib64/haswell/ ]; then \
-        cp initramfs/usr/lib64/haswell/* initramfs/usr/lib64/; \
+        for lib in $$(ls initramfs/usr/lib64/haswell/); \
+        do \
+            cp /usr/lib64/$$lib initramfs/usr/lib64/ ; \
+        done \
     fi &&\
     cd initramfs && \
     find . -print0 | cpio -o --null --format=newc | gzip -9 > ../clr-init.cpio.gz && \
