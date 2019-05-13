@@ -130,7 +130,6 @@
 /usr/bin/modprobe
 /usr/lib/udev/ata_id
 /usr/lib/udev/cdrom_id
-/usr/lib/udev/collect
 /usr/lib/udev/hid2hci
 /usr/lib/udev/kpartx_id
 /usr/lib/udev/libinput-device-group
