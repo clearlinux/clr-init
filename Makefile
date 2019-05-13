@@ -9,7 +9,7 @@ all:
     do \
         cp -f $$file initramfs/$$file;\
     done && \
-    for file in $$(ldd $(BINFILES) | awk '{print $$3}' | grep "^/" | sort | uniq); \
+    for file in $$(ldd $(BINFILES) | awk '{print $$3}' | grep "^/" | grep -v avx512_1 | sort | uniq); \
     do \
         file_path=$$(dirname $$file); \
         cp $$file initramfs/$$file_path/; \
