@@ -15,15 +15,15 @@ clr-init.cpio:
 		mkdir -p initramfs/usr/lib64/haswell;\
 	fi
 	for file in $(BINFILES); do \
-		cp -fa $$file initramfs/$$file;\
+		cp -fan $$file initramfs/$$file;\
 	done
 	for file in $$(ldd $(BINFILES) | awk '{print $$3}' | grep "^/" | sort | uniq); do \
 		file_path=$$(dirname $$file); \
-		cp -a $$file initramfs/$$file_path/; \
+		cp -an $$file initramfs/$$file_path/; \
 	done
 	if [ -d /usr/lib64/haswell/ ]; then \
 		for lib in $$(ls initramfs/usr/lib64/haswell/); do \
-			cp -a /usr/lib64/$$lib initramfs/usr/lib64/ ; \
+			cp -an /usr/lib64/$$lib initramfs/usr/lib64/ ; \
 		done \
 	fi
 	( cd initramfs && \
