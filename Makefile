@@ -26,6 +26,7 @@ clr-init.cpio:
 	done
 	if [ -d /usr/lib64/haswell/ ]; then \
 		for lib in $$(ls initramfs/usr/lib64/haswell/); do \
+			[ $$lib == "avx512_1" ] && continue; \
 			cp -rn /usr/lib64/$$lib initramfs/usr/lib64/ ; \
 		done \
 	fi
