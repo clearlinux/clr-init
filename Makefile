@@ -14,6 +14,9 @@ clr-init.cpio:
 	if [ -d /usr/lib64/haswell/ ]; then \
 		mkdir -p initramfs/usr/lib64/haswell;\
 	fi
+	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
+		mkdir -p initramfs/usr/lib64/haswell/avx512_1;\
+	fi
 	for file in $(BINFILES); do \
 		cp -frn $$file initramfs/$$file;\
 	done
@@ -23,6 +26,11 @@ clr-init.cpio:
 	done
 	if [ -d /usr/lib64/haswell/ ]; then \
 		for lib in $$(ls initramfs/usr/lib64/haswell/); do \
+			cp -rn /usr/lib64/$$lib initramfs/usr/lib64/ ; \
+		done \
+	fi
+	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
+		for lib in $$(ls initramfs/usr/lib64/haswell/avx512_1/); do \
 			cp -rn /usr/lib64/$$lib initramfs/usr/lib64/ ; \
 		done \
 	fi
