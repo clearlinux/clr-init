@@ -6,7 +6,7 @@ BINFILES=`cat bin_files`
 all: $(TARGET)
 
 %.cpio.gz: %.cpio
-	gzip -9 $<
+	gzip -9 -f $<
 
 clr-init.cpio:
 	set -e;
