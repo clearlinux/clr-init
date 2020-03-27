@@ -10,7 +10,7 @@ all: $(TARGET)
 
 clr-init.cpio:
 	set -e;
-	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root}
+	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root,usr/lib/udev/rules.d,usr/lib/udev/hwdb.d}
 	if [ -d /usr/lib64/haswell/ ]; then \
 		mkdir -p initramfs/usr/lib64/haswell;\
 	fi
@@ -18,11 +18,13 @@ clr-init.cpio:
 		mkdir -p initramfs/usr/lib64/haswell/avx512_1;\
 	fi
 	for file in $(BINFILES); do \
-		cp -fL $$file initramfs/$$file;\
-	done
-	for file in $$(ldd $(BINFILES) | awk '{print $$3}' | grep "^/" | sort | uniq); do \
-		file_path=$$(dirname $$file); \
-		cp -Ln $$file initramfs/$$file_path/; \
+		cp -fL $$file initramfs/$$file || exit 1;\
+		if file $$file | grep -q ELF; then \
+			for lddfile in $$(ldd $$file | awk '{print $$3}' | grep "^/"); do \
+				file_path=$$(dirname $$lddfile); \
+				cp -Ln $$lddfile initramfs/$$file_path/; \
+			done \
+		fi \
 	done
 	if [ -d /usr/lib64/haswell/ ]; then \
 		for lib in $$(ls initramfs/usr/lib64/haswell/); do \
