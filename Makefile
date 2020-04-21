@@ -10,7 +10,7 @@ all: $(TARGET)
 
 clr-init.cpio:
 	set -e;
-	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root,usr/lib/udev/rules.d,usr/lib/udev/hwdb.d}
+	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root,usr/lib/udev/rules.d,usr/lib/udev/hwdb.d}
 	if [ -d /usr/lib64/haswell/ ]; then \
 		mkdir -p initramfs/usr/lib64/haswell;\
 	fi
@@ -48,5 +48,5 @@ clean:
 	@for file in $(BINFILES); do \
 		rm -f initramfs/$$file; \
 	done
-	rm -rf initramfs/{sys,dev,proc,tmp,var,sysroot,usr/sbin,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root}
+	rm -rf initramfs/{sys,dev,proc,tmp,var,sysroot,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root}
 	rm -f clr-init.cpio $(TARGET)
