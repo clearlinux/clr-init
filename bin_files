@@ -29,6 +29,7 @@
 /usr/bin/loadkeys
 /usr/bin/losetup
 /usr/bin/lvm
+/usr/bin/lvmetad
 /usr/bin/mdadm
 /usr/bin/mdmon
 /usr/bin/mount
@@ -294,3 +295,6 @@
 /usr/lib/systemd/system/sysinit.target
 /usr/lib/systemd/system/systemd-reboot.service
 /usr/lib/systemd/system/swap.target
+/usr/lib/systemd/system/lvm2-lvmetad.service
+/usr/lib/systemd/system/lvm2-lvmetad.socket
+/usr/lib/systemd/system/lvm2-pvscan@.service
