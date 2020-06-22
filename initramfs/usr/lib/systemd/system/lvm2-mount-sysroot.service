@@ -1,0 +1,12 @@
+[Unit]
+Description=LVM2 mount sysroot before switching to rootfs
+DefaultDependencies=no
+Before=initrd-root-device.target
+
+[Service]
+Type=oneshot
+ExecStart=-/bin/lvm lvchange --select lv_name=~CLR_ROOT -a y
+TimeoutStartSec=0
+
+[Install]
+WantedBy=initrd-root-device.target
