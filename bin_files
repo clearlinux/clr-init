@@ -84,7 +84,6 @@
 /usr/lib/systemd/systemd-fsck
 /usr/lib/systemd/systemd-hibernate-resume
 /usr/lib/systemd/systemd-hostnamed
-/usr/lib/systemd/systemd-initctl
 /usr/lib/systemd/systemd-journald
 /usr/lib/systemd/systemd-localed
 /usr/lib/systemd/systemd-logind
