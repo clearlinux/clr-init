@@ -199,7 +199,6 @@
 /usr/lib/udev/rules.d/80-udisks2.rules
 /usr/lib/udev/rules.d/90-rdma-hw-modules.rules
 /usr/lib/udev/rules.d/77-mm-telit-port-types.rules
-/usr/lib/udev/rules.d/95-upower-csr.rules
 /usr/lib/udev/rules.d/13-dm-disk.rules
 /usr/lib/udev/rules.d/75-rdma-description.rules
 /usr/lib/udev/rules.d/60-srp_daemon.rules
