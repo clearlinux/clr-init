@@ -81,7 +81,6 @@
 /usr/bin/xfs_metadump
 /usr/bin/xfs_repair
 /usr/lib64/libnss_altfiles.so.*
-/usr/lib64/libnss_files-*.so
 /usr/lib64/libnss_files.so.*
 /usr/lib64/multipath/*
 /usr/lib/systemd/libsystemd-shared-*.so
