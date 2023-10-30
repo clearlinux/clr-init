@@ -29,7 +29,6 @@
 /usr/bin/ls
 /usr/bin/lsmod
 /usr/bin/lvm
-/usr/bin/lvmetad
 /usr/bin/mdadm
 /usr/bin/mdmon
 /usr/bin/modprobe
@@ -83,7 +82,7 @@
 /usr/lib64/libnss_altfiles.so.*
 /usr/lib64/libnss_files.so.*
 /usr/lib64/multipath/*
-/usr/lib/systemd/libsystemd-shared-*.so
+/usr/lib64/systemd/libsystemd-shared-*.so
 /usr/lib/systemd/system/basic.target
 /usr/lib/systemd/system/cryptsetup-pre.target
 /usr/lib/systemd/system/cryptsetup.target
@@ -148,9 +147,6 @@
 /usr/lib/systemd/system/kmod-static-nodes.service
 /usr/lib/systemd/system/local-fs-pre.target
 /usr/lib/systemd/system/local-fs.target
-/usr/lib/systemd/system/lvm2-lvmetad.service
-/usr/lib/systemd/system/lvm2-lvmetad.socket
-/usr/lib/systemd/system/lvm2-pvscan@.service
 /usr/lib/systemd/system/paths.target
 /usr/lib/systemd/system/remote-veritysetup.target
 /usr/lib/systemd/system/rescue.target
@@ -247,7 +243,6 @@
 /usr/lib/udev/rules.d/66-kpartx.rules
 /usr/lib/udev/rules.d/68-del-part-nodes.rules
 /usr/lib/udev/rules.d/69-cd-sensors.rules
-/usr/lib/udev/rules.d/69-dm-lvm-metad.rules
 /usr/lib/udev/rules.d/69-libmtp.rules
 /usr/lib/udev/rules.d/70-joystick.rules
 /usr/lib/udev/rules.d/70-memory.rules
@@ -268,13 +263,10 @@
 /usr/lib/udev/rules.d/77-mm-longcheer-port-types.rules
 /usr/lib/udev/rules.d/77-mm-mtk-port-types.rules
 /usr/lib/udev/rules.d/77-mm-nokia-port-types.rules
-/usr/lib/udev/rules.d/77-mm-pcmcia-device-blacklist.rules
 /usr/lib/udev/rules.d/77-mm-sierra.rules
 /usr/lib/udev/rules.d/77-mm-simtech-port-types.rules
 /usr/lib/udev/rules.d/77-mm-telit-port-types.rules
 /usr/lib/udev/rules.d/77-mm-ublox-port-types.rules
-/usr/lib/udev/rules.d/77-mm-usb-device-blacklist.rules
-/usr/lib/udev/rules.d/77-mm-usb-serial-adapters-greylist.rules
 /usr/lib/udev/rules.d/77-mm-x22x-port-types.rules
 /usr/lib/udev/rules.d/77-mm-zte-port-types.rules
 /usr/lib/udev/rules.d/78-sound-card.rules
@@ -290,7 +282,6 @@
 /usr/lib/udev/rules.d/90-fwupd-devices.rules
 /usr/lib/udev/rules.d/90-iwpmd.rules
 /usr/lib/udev/rules.d/90-nm-thunderbolt.rules
-/usr/lib/udev/rules.d/90-pulseaudio.rules
 /usr/lib/udev/rules.d/90-rdma-hw-modules.rules
 /usr/lib/udev/rules.d/90-rdma-ulp-modules.rules
 /usr/lib/udev/rules.d/90-rdma-umad.rules
