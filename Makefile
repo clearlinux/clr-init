@@ -17,6 +17,15 @@ clr-init.cpio:
 	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
 		mkdir -p initramfs/usr/lib64/haswell/avx512_1;\
 	fi
+	if [ -d /usr/lib64/glibc-hwcaps/ ]; then \
+		mkdir -p initramfs/usr/lib64/glibc-hwcaps;\
+	fi
+	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v3 ]; then \
+		mkdir -p initramfs/usr/lib64/glibc-hwcaps/x86-64-v3;\
+	fi
+	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v4 ]; then \
+		mkdir -p initramfs/usr/lib64/glibc-hwcaps/x86-64-v4;\
+	fi
 	for file in $(BINFILES); do \
 		cp -fL $$file initramfs/$$file || exit 1;\
 		if file $$file | grep -q ELF; then \
@@ -34,6 +43,16 @@ clr-init.cpio:
 	fi
 	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
 		for lib in $$(ls initramfs/usr/lib64/haswell/avx512_1/); do \
+			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
+		done \
+	fi
+	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v3 ]; then \
+		for lib in $$(ls initramfs/usr/lib64/glibc-hwcaps/x86-64-v3/); do \
+			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
+		done \
+	fi
+	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v4 ]; then \
+		for lib in $$(ls initramfs/usr/lib64/glibc-hwcaps/x86-64-v4/); do \
 			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
 		done \
 	fi
