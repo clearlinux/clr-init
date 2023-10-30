@@ -27,11 +27,12 @@ clr-init.cpio:
 		mkdir -p initramfs/usr/lib64/glibc-hwcaps/x86-64-v4;\
 	fi
 	for file in $(BINFILES); do \
+		mkdir -p initramfs/$$(dirname "$${file}"); \
 		cp -fL $$file initramfs/$$file || exit 1;\
 		if file $$file | grep -q ELF; then \
 			for lddfile in $$(ldd $$file | awk '{print $$3}' | grep "^/"); do \
 				file_path=$$(dirname $$lddfile); \
-				cp -Ln $$lddfile initramfs/$$file_path/; \
+				cp -Lu $$lddfile initramfs/$$file_path/; \
 			done \
 		fi \
 	done
