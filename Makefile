@@ -11,52 +11,19 @@ all: $(TARGET)
 clr-init.cpio:
 	set -e;
 	mkdir -p initramfs/{sys,dev,proc,tmp,var,sysroot,usr/bin,usr/lib/systemd/system-generators,usr/lib64,usr/lib64/multipath,run,root,usr/lib/udev/rules.d,usr/lib/udev/hwdb.d}
-	if [ -d /usr/lib64/haswell/ ]; then \
-		mkdir -p initramfs/usr/lib64/haswell;\
-	fi
-	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
-		mkdir -p initramfs/usr/lib64/haswell/avx512_1;\
-	fi
-	if [ -d /usr/lib64/glibc-hwcaps/ ]; then \
-		mkdir -p initramfs/usr/lib64/glibc-hwcaps;\
-	fi
-	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v3 ]; then \
-		mkdir -p initramfs/usr/lib64/glibc-hwcaps/x86-64-v3;\
-	fi
-	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v4 ]; then \
-		mkdir -p initramfs/usr/lib64/glibc-hwcaps/x86-64-v4;\
-	fi
 	for file in $(BINFILES); do \
 		mkdir -p initramfs/$$(dirname "$${file}"); \
 		cp -fL $$file initramfs/$$file || exit 1;\
 		if file $$file | grep -q ELF; then \
 			for lddfile in $$(ldd $$file | awk '{print $$3}' | grep "^/"); do \
-				file_path=$$(dirname $$lddfile); \
-				cp -Lu $$lddfile initramfs/$$file_path/; \
+				base_lib=$$(sed 's/glibc-hwcaps\/x86-64-v[34]\///' <<< $${lddfile}); \
+				file_path=$$(dirname $${base_lib}); \
+				mkdir -p initramfs/$${file_path}; \
+				echo cp -Lu $$base_lib initramfs/$$file_path/; \
+				cp -Lu $$base_lib initramfs/$$file_path/; \
 			done \
 		fi \
 	done
-	if [ -d /usr/lib64/haswell/ ]; then \
-		for lib in $$(ls initramfs/usr/lib64/haswell/); do \
-			[ $$lib == "avx512_1" ] && continue; \
-			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
-		done \
-	fi
-	if [ -d /usr/lib64/haswell/avx512_1 ]; then \
-		for lib in $$(ls initramfs/usr/lib64/haswell/avx512_1/); do \
-			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
-		done \
-	fi
-	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v3 ]; then \
-		for lib in $$(ls initramfs/usr/lib64/glibc-hwcaps/x86-64-v3/); do \
-			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
-		done \
-	fi
-	if [ -d /usr/lib64/glibc-hwcaps/x86-64-v4 ]; then \
-		for lib in $$(ls initramfs/usr/lib64/glibc-hwcaps/x86-64-v4/); do \
-			cp -L /usr/lib64/$$lib initramfs/usr/lib64/ ; \
-		done \
-	fi
 	( cd initramfs && \
 		find . -print0 | cpio -o --null --format=newc ) > $@
 
