@@ -49,6 +49,7 @@
 /usr/bin/sulogin
 /usr/bin/swapoff
 /usr/bin/systemctl
+/usr/bin/systemd-ac-power
 /usr/bin/systemd-analyze
 /usr/bin/systemd-ask-password
 /usr/bin/systemd-cat
@@ -88,7 +89,6 @@
 /usr/lib/systemd/system/cryptsetup.target
 /usr/lib/systemd/system/ctrl-alt-del.target
 /usr/lib/systemd/systemd
-/usr/lib/systemd/systemd-ac-power
 /usr/lib/systemd/systemd-backlight
 /usr/lib/systemd/systemd-binfmt
 /usr/lib/systemd/systemd-cgroups-agent
@@ -163,7 +163,6 @@
 /usr/lib/systemd/system/systemd-journald-dev-log.socket
 /usr/lib/systemd/system/systemd-journald.service
 /usr/lib/systemd/system/systemd-journald.socket
-/usr/lib/systemd/system/systemd-journal-flush-msft.service
 /usr/lib/systemd/system/systemd-journal-flush.service
 /usr/lib/systemd/system/systemd-modules-load.service
 /usr/lib/systemd/system/systemd-modules-trigger.service
@@ -279,7 +278,6 @@
 /usr/lib/udev/rules.d/81-net-dhcp.rules
 /usr/lib/udev/rules.d/85-nm-unmanaged.rules
 /usr/lib/udev/rules.d/90-alsa-restore.rules
-/usr/lib/udev/rules.d/90-fwupd-devices.rules
 /usr/lib/udev/rules.d/90-iwpmd.rules
 /usr/lib/udev/rules.d/90-nm-thunderbolt.rules
 /usr/lib/udev/rules.d/90-rdma-hw-modules.rules
