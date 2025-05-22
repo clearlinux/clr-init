@@ -93,6 +93,7 @@
 /usr/lib/systemd/systemd-binfmt
 /usr/lib/systemd/systemd-cgroups-agent
 /usr/lib/systemd/systemd-cryptsetup
+/usr/lib/systemd/systemd-executor
 /usr/lib/systemd/systemd-fsck
 /usr/lib/systemd/systemd-hibernate-resume
 /usr/lib/systemd/systemd-hostnamed
